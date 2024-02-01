@@ -11,10 +11,10 @@ const Contact = () =>{
             <ContactContentDiv>
                 <ContactMainTitle>Contact</ContactMainTitle>
                 <ContactMainDiv>
-                <p>Send job offers and donations to <EmailAnchor href={"mailto:solbaboon@gmail.com"}><ContactIconsImg src={emailUrl}/>solbaboon@gmail.com</EmailAnchor> </p>
+                <p>Business e-mail: <EmailAnchor href={"mailto:renaud.c.portfolio@gmail.com"}><ContactIconsImg src={emailUrl}/>renaud.c.portfolio@gmail.com</EmailAnchor> </p>
                 <p style={{visibility:"hidden"}}>not a line break</p>
                 <p>
-                <ContactIconsImg src={githubUrl}/>Github: <EmailAnchor href={"https://github.com/RenaudCormierBootcamp"}>Find my latest code repositories here</EmailAnchor>
+                <ContactIconsImg src={githubUrl}/>Github: <EmailAnchor href={"https://github.com/RenaudCPortfolio"}>Find my latest code repositories here</EmailAnchor>
                 </p>
                 <p>
                 <ContactIconsImg src={itchUrl}/>Itch.io: <EmailAnchor href={"https://themonstreking.itch.io/"}>Published playable interactive and game projects</EmailAnchor>
