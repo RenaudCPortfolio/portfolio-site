@@ -8,6 +8,8 @@ import About from "./components/About";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
  
+let selection = 0;
+
 
 function App() {
 
@@ -20,9 +22,17 @@ function App() {
         <MainFrame>
           <div> Renaud Cormier </div>
         </MainFrame>
-        <Link to="/"><SubFrame>Main-About</SubFrame></Link>
-        <Link to="/projects"><SubFrame>Projects</SubFrame></Link>
-        <Link to="/contact"><SubFrame>Contact</SubFrame> </Link>
+        <Link to="/"><SubFrame 
+        {...( selection === 0 ? {className:"selected"}:{})}
+        >Main-About</SubFrame></Link>
+        <Link to="/projects"
+        {...( selection === 1 ? {className:"selected"}:{})}
+        ><SubFrame 
+        {...( selection === 2 ? {className:"selected"}:{})}
+        >Projects</SubFrame></Link>
+        <Link to="/contact"
+        {...( selection === 3 ? {className:"selected"}:{})} 
+        ><SubFrame>Contact</SubFrame> </Link>
          
       </FrameDiv> 
 
@@ -73,8 +83,7 @@ width:35vw;
 top:0px; 
 box-shadow: rgba(255, 60, 33,0.5) 5px 0, rgba(255, 60, 33,0.4) 10px 0, rgba(255, 60, 33,0.3) 15px 0, rgba(255, 60, 33,0.2) 20px 0, rgba(255, 60, 33,0.1) 25px 0;
 
-`
-
+` 
 const MainFrame = styled.div`   
 font-family: superstar, Arial, Helvetica, sans-serif;
 text-shadow: 0.4vh 0vh black, -0.4vh 0vh black, 0vh 0.4vh black, 0vh -0.4vh black, 0.4vh -0.4vh black, -0.4vh 0.4vh black;
@@ -102,6 +111,11 @@ transition: all 200ms ease-out;
   -webkit-text-stroke: 4px yellow;
   font-size: 5.2vh; 
   text-decoration-color: yellow;
+}
+&.selected{
+  font-size: 5.4vh;
+  -webkit-text-stroke: 4px black;
+  text-decoration-color: black; 
 }
 `
 

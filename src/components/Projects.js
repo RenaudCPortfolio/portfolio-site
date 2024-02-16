@@ -32,9 +32,11 @@ const Projects = () =>{
                                 return (
 
                                     <MiniProjectDiv key={"key"+String(index)} onClick={()=>{
+
                                         setCurrentProject(project);
                                         setSelectedIndex(index);
-                                        window.scrollTo(0,0) 
+                                        window.scrollTo(0,0);
+
                                          }
                                     }>
                                      {selectedIndex!=index && (
@@ -65,7 +67,7 @@ font-family: superstar;
 font-size:4.5vh;
 filter: drop-shadow(2px 0 0 ${GoodOrange})  drop-shadow(2px 2px 0 ${GoodOrange});
 `
-
+ 
 const SelectedProject = styled.div`
 background-color: rgb(255,111,0);
 background-repeat:no-repeat;
@@ -82,7 +84,7 @@ height:22vh;
 max-height:22vh;
 -webkit-text-stroke: 1.5px black;
 box-shadow: rgb(255, 255, 255)0px 0px 0px 2px;
-    box-shadow: rgba(255, 111, 0, 0.5) 0px 2px 26px 5px; 
+box-shadow: rgba(255, 111, 0, 0.5) 0px 2px 26px 5px; 
 ` 
 
 const SelectedAnimProject = styled.div`
@@ -105,7 +107,8 @@ color:white;
 const MiniProjectDiv = styled.div`
 cursor:pointer;
 transition: 200ms ease-in;
-max-height: 28vh;
+width: fit-content;
+height: fit-content;
 &:hover{
     box-shadow: rgba(255, 111, 0, 0.5) 0px 2px 26px 5px; 
 }
