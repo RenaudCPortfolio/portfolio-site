@@ -27,17 +27,12 @@ const ProjectWithDesc = ({project}) =>{
     )
 }
 
-const ProjectDesc = styled.div`
-font-family: arial;
-display: inline-block; 
-font-size: 2.3vh;
-vertical-align: top; 
-width:45vh;
-height:35vh;
-padding:12px;
-`
+const GoodOrange = "rgb(255,110,0)";
+
 const BigProjectDiv = styled.div`   
-    background-color: rgba(255,255,255,0.10);
+    cursor: pointer;
+    pointer-events: all;
+    background-color: #333333;
     border-radius:10px;
     position: relative;
     margin:auto;
@@ -45,11 +40,22 @@ const BigProjectDiv = styled.div`
     width:fit-content;
     max-height:35vh; 
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
-    transition: 200ms ease-in;
+    transition: 200ms ease-in; 
+    border: 2px white solid;
     &:hover{
-        background-color: rgba(255,255,255,0.15); 
-        box-shadow: rgba(255, 111, 0, 0.5) 0px 0px 16px; 
+         background-color: #444444; 
+        filter: drop-shadow(-4px 0 0 ${GoodOrange}) drop-shadow(0 4px 0 ${GoodOrange}) drop-shadow(4px -4px 0 ${GoodOrange});
     }
+`
+
+const ProjectDesc = styled.div`
+font-family: arial;
+display: inline-block; 
+font-size: 2.3vh;
+vertical-align: top; 
+width:25vh;
+height:35vh;
+padding:18px;
 `
  
 const ProjectDiv = styled.div`
@@ -66,7 +72,7 @@ width:35vh;
 max-width:35vh;
 height:35vh; 
 max-height:35vh;
--webkit-text-stroke: 1px black;
+-webkit-text-stroke: 2px black;
 `
 const Loader = styled.div`
     visibility: hidden;

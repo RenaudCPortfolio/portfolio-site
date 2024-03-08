@@ -12,7 +12,7 @@ const projects = [
         desc: "Idea generator for creatives. randomly makes a new idea every day, with a global shared version to everyone and a personal version that can include user-added projects. ",
         tech: "react html5",
         details: "an old idea i've wanted to remake in a way that's more accessible, making it on the web seemed like the best idea. Adding a shared global version without going so far as making it server-involved meant i needed to create a random number generator that goes off the current date.",
-        src: "placeholder.png",
+        src: "makergenerator.png",
         gif: "placeholder.png",
     },
     {

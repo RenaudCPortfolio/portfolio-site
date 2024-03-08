@@ -34,6 +34,7 @@ opacity: 0;
 `
 
 const PopupDiv = styled.div`
+color:white;
 padding:4px;
 font-size: 18px;
 border: 2px solid white;

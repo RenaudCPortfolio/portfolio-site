@@ -10,9 +10,7 @@ import gitUrl from "../assets/logo-git.png"
 import canvasUrl from "../assets/logo-canvas.png"
 import CoolPopup from "./CoolPopup"
 
-import githubUrl from "../assets/icon-github.png"
-import emailUrl from "../assets/icon-at.png"
-import itchUrl from "../assets/icon-itch.svg"
+
 
 import { useEffect, useState, useRef } from "react"
 import { projects } from "../data/dataProjects"
@@ -68,17 +66,11 @@ const About = () => {
                 <QuickContact> 
                     <AboutPortrait> 
                     </AboutPortrait> 
-                    <QuickContactText>Quick Contact</QuickContactText>
-                    <div>
-                        <a href={"https://github.com/RenaudCormierBootcamp"}><PopContactsImg src={githubUrl} popElement={<span>Github</span>} onEnterHandler={popupHandler}  onOutHandler={popupOut} /></a>
-                        <a href={"mailto:solbaboon@gmail.com"}><PopContactsImg src={emailUrl} popElement={<span>E-Mail</span>} onEnterHandler={popupHandler}  onOutHandler={popupOut}/></a>
-                        <a href={"https://themonstreking.itch.io/"}><PopContactsImg src={itchUrl} popElement={<span>itch.io</span>} onEnterHandler={popupHandler}  onOutHandler={popupOut}/></a>
-                    </div>
                 </QuickContact>
                 
                 <AboutMainTitle>ABOUT</AboutMainTitle>
                 <AboutSubTitle>Full stack web developper specialized in user interactions</AboutSubTitle>
-                <AboutSubTitle >  
+                <AboutTechnologiesDiv >  
                     <PopIconsImg onEnterHandler={popupHandler} popElement={<span>Javascript</span>} onOutHandler={popupOut} src={javaScrUrl}   /> 
                     <PopIconsImg onEnterHandler={popupHandler} popElement={<span>HTML5</span>} onOutHandler={popupOut} src={htmlUrl}  /> 
                     <PopIconsImg onEnterHandler={popupHandler} popElement={<span>Canvas</span>} onOutHandler={popupOut} src={canvasUrl}   /> 
@@ -87,11 +79,14 @@ const About = () => {
                     <PopIconsImg onEnterHandler={popupHandler} popElement={<span>MongoDB</span>} onOutHandler={popupOut} src={mongoUrl}  /> 
                     <PopIconsImg onEnterHandler={popupHandler} popElement={<span>Git</span>} onOutHandler={popupOut} src={gitUrl}  />  
                     
-                     </AboutSubTitle> 
-                     <AboutSubTitle style={{"textAlign":"center"}}>Most recent project:</AboutSubTitle>
-                    <div style={{width:"70vw"}}>
-                        <ProjectWithDesc project={projects[0]}/>
-                     </div>
+                     </AboutTechnologiesDiv> 
+                     <AboutSubTitle style={{}}>Most recent projects:</AboutSubTitle>
+                    <AboutProjectsDiv style={{width:"70vw"}}>
+                        <ProjectsPreviewDiv>
+                        <ProjectWithDesc project={projects[0]}/> </ProjectsPreviewDiv>
+                        <ProjectsPreviewDiv>
+                        <ProjectWithDesc project={projects[1]}/> </ProjectsPreviewDiv>
+                     </AboutProjectsDiv>
             </AboutContentDiv>
             <CoolPopup popup={popup} />
         </AboutDiv>
@@ -250,11 +245,19 @@ const AboutSubTitle = styled.div`
 margin:15px 5px 5px 15px;
 font-size:5vh;
 `
-
-const AboutContent = styled.div`
+const AboutTechnologiesDiv = styled.div`
+margin:15px 5px 5px 150px; 
+font-size:5vh;
+`
+const AboutProjectsDiv = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+pointer-events: none;
 
 `
-const AboutImages = styled.div` 
+const ProjectsPreviewDiv = styled.div`
+pointer-events: none;
 `
 
 const ContactIconsImg = styled.img`
@@ -274,8 +277,7 @@ height: 11vh;
 cursor: pointer;
 filter: brightness(0) invert(1) drop-shadow(0px 0 0 ${GoodOrange})  drop-shadow(0px 0 0 ${GoodOrange});
 transition: all 200ms ease-out;
-&:hover{
-
+&:hover{ 
     filter: brightness(0) invert(0.5)  drop-shadow(2px 0 0 ${GoodOrange}) drop-shadow(-2px 0 0 ${GoodOrange}) drop-shadow(0 2px 0 ${GoodOrange}) drop-shadow(0 -2px 0 ${GoodOrange});
 }
 `

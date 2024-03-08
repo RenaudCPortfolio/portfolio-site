@@ -1,18 +1,46 @@
 
 import styled from "styled-components";
-import { useState,useContext } from "react";   
+import { useState,useContext, useRef, useEffect } from "react";   
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 import About from "./components/About"; 
 import Projects from "./components/Projects";
-import Contact from "./components/Contact";
- 
-let selection = 0;
+import Contact from "./components/Contact"; 
+import CoolPopup from "./components/CoolPopup";
+
+import githubUrl from "./assets/icon-github.png"
+import emailUrl from "./assets/icon-at.png"
+import itchUrl from "./assets/icon-itch.svg"
+  
+
+
 
 
 function App() {
 
+  const [popup,setPopup] = useState([false,0,0,<></>]); 
+    const [anim,setAnim] = useState(false);
+    const [selection,setSelection] = useState(0);
+
+    const imgRef = useRef();
+     
+    const popupHandler = (elemento,target) =>{   
+        const _pos = target.getBoundingClientRect(); 
+        setPopup([true,`${Math.floor(_pos.left+_pos.width/2)}px`,`${Math.floor(_pos.bottom+15)}px`,elemento]);
+    }
+
+    const popupOut = () =>{
+        setPopup([false,0,0,<></>]);
+    }
+
+    useEffect(
+        ()=>{setAnim(true);
+        setTimeout(()=>{
+            setAnim(false);
+        },2000)
+        }
+        ,[])
   
   return ( 
     
@@ -22,17 +50,27 @@ function App() {
         <MainFrame>
           <div> Renaud Cormier </div>
         </MainFrame>
+        <FlexFrameDiv>
         <Link to="/"><SubFrame 
         {...( selection === 0 ? {className:"selected"}:{})}
-        >Main-About</SubFrame></Link>
-        <Link to="/projects"
-        {...( selection === 1 ? {className:"selected"}:{})}
+        onClick={()=>{setSelection(0);}}
+        >Main-About</SubFrame></Link></FlexFrameDiv>
+        <FlexFrameDiv>
+        <Link to="/projects" 
         ><SubFrame 
-        {...( selection === 2 ? {className:"selected"}:{})}
-        >Projects</SubFrame></Link>
-        <Link to="/contact"
-        {...( selection === 3 ? {className:"selected"}:{})} 
-        ><SubFrame>Contact</SubFrame> </Link>
+        {...( selection === 1 ? {className:"selected"}:{})}
+        onClick={()=>{setSelection(1);}}
+        >Projects</SubFrame></Link></FlexFrameDiv>
+         
+        <IconsFrameDiv> 
+                    <IconsIndividualDiv>
+                        <a href={"https://github.com/RenaudCormierBootcamp"} target=" _blank" rel="noreferrer noopener"><PopContactsImg src={githubUrl} popElement={<span>Github</span>} onEnterHandler={popupHandler}  onOutHandler={popupOut} /></a>
+                    </IconsIndividualDiv> 
+                    <IconsIndividualDiv>
+                        <a href={"mailto:renaud.c.portfolio@hotmail.com"} target=" _blank" rel="noreferrer noopener" ><PopContactsImg src={emailUrl} popElement={<span>E-Mail</span>} onEnterHandler={popupHandler}  onOutHandler={popupOut}/></a> 
+                    </IconsIndividualDiv> 
+          
+        </IconsFrameDiv> 
          
       </FrameDiv> 
 
@@ -47,12 +85,26 @@ function App() {
         </Routes>
       </ContentDiv>
 
-
+      <CoolPopup popup={popup} />
     </MainDiv>
     </BrowserRouter>
   )
 }
 
+const PopContactsImg = ({imgRef,src,onEnterHandler,onOutHandler,popElement}) =>{
+  return (
+  <ContactIconsImg elemento={popElement} ref={imgRef} src={src} 
+      onMouseEnter={(event)=>{
+          onEnterHandler(popElement,event.target);
+      }} 
+      onMouseOut={(onOutHandler)}
+  /> 
+  )
+}
+
+/// --- Styling Start---
+
+const GoodOrange = "rgb(255,110,0)";
 const shadowColor = "#FF5522";
 
 const MainDiv = styled.div`  
@@ -89,10 +141,16 @@ font-family: superstar, Arial, Helvetica, sans-serif;
 text-shadow: 0.4vh 0vh black, -0.4vh 0vh black, 0vh 0.4vh black, 0vh -0.4vh black, 0.4vh -0.4vh black, -0.4vh 0.4vh black;
 font-size: 10vh; 
 height:95%;
-
+margin-left:1vw;
+margin-right:5vw;
 `
-const SubFrame = styled.div`    
+const FlexFrameDiv = styled.div`
+flex:2;
+`
+
+const SubFrame = styled.div`     
 cursor: pointer;
+flex:2;
 font-family: zero4B, Arial, Helvetica, sans-serif;
 text-decoration: underline;
 text-decoration-thickness: 0.5vh; 
@@ -103,7 +161,7 @@ position: relative;
 top:0.7vh;
 display: inline; 
 display:flex;
-justify-content: flex-end; 
+justify-content: center; 
 align-items: flex-end;
 transition: all 200ms ease-out;
   -webkit-text-stroke: 0px rgb(255,110,0);
@@ -113,14 +171,49 @@ transition: all 200ms ease-out;
   text-decoration-color: yellow;
 }
 &.selected{
-  font-size: 5.4vh;
-  -webkit-text-stroke: 4px black;
-  text-decoration-color: black; 
+  color:yellow;
+  font-size: 5.8vh;  
+  text-decoration-color: yellow;
+} 
+&.selected:before{
+  color:white;
+  content:"[";
+}
+&.selected:after{
+  color:white;
+  content:"]";
 }
 `
 
-const ContentDiv = styled.div` 
+const IconsFrameDiv = styled.div` 
+flex:2;
+margin-top:1.5vh;
+height:100%; 
+display:flex; 
+flex-direction: row;
+justify-content: space-evenly; 
+`
 
+const IconsIndividualDiv = styled.div` 
+height:100%; 
+display: flex;
+flex-direction: column;
+align-items: center;
+`
+
+const ContactIconsImg = styled.img`
+height: 9vh;
+margin:5px;
+cursor: pointer;
+filter: brightness(0) invert(1) drop-shadow(0px 0 0 yellow)  drop-shadow(0px 0 0 yellow);
+transition: all 200ms ease-out;
+&:hover{
+
+    filter: brightness(0) invert(0.5)  drop-shadow(2px 0 0 yellow) drop-shadow(-2px 0 0 yellow) drop-shadow(0 2px 0 yellow) drop-shadow(0 -2px 0 yellow);
+}
+`
+
+const ContentDiv = styled.div`  
 `
 
 export default App;
